@@ -1,11 +1,10 @@
 from model.EvalEstudiante import EvaluacionEstudiante
-import yfinance as yf
 import matplotlib.pyplot as plt
 
 
 
-def analisis(st, controller):
-    opcion = st.radio( "Que analisis quieres hacer?", ('Encontrar Calificacion más alta', 'notas estudiantes') )
+def analisis(st, controller, criterio_controler):
+    opcion = st.radio( "Que analisis quieres hacer?", ('Encontrar Calificacion más alta', 'notas estudiantes', 'Estadistica criterios') )
     if opcion == 'Encontrar Calificacion más alta':
         if len( controller.evaluaciones ) > 0:
             mejor_calificacion = EvaluacionEstudiante()
@@ -33,5 +32,36 @@ def analisis(st, controller):
         plt.ylabel("Nombre estudiantes")
         plt.title("Notas")
         st.pyplot(fig)
+
+    elif opcion == 'Estadistica criterios':
+        cantidad = 0
+        nombre_criterios = []
+        notas = []
+        numeros_criterio = []
+        contador = 1
+        for personas in controller.evaluaciones:
+            if len(personas.calificacion) > 0:
+                cantidad += 1
+        for name in criterio_controler.criterios:
+            notas.append( 0 )
+            nombre_criterios.append( name.identificador )
+            numeros_criterio.append( contador  )
+            contador += 1
+        for i in controller.evaluaciones:
+            for j in range(len(i.calificacion)):
+                notas[j] += i.calificacion[j].nota_final
+        for k in range(len(notas)):
+            if cantidad > 0:
+                notas[k] /= cantidad
+                print(notas[k])
+        fig = plt.figure(figsize=(10, 5))
+        plt.bar(numeros_criterio, notas)
+        plt.xlabel("Criterios")
+        plt.ylabel("Notas criterios")
+        plt.title("Notas")
+        st.pyplot(fig)
+        for iterador in range( len(nombre_criterios) ):
+            st.write( str(numeros_criterio[iterador]) + " = " + nombre_criterios[iterador]  )
+
 
 
