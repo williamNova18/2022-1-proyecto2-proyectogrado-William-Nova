@@ -1,8 +1,7 @@
 from model.Acta import PDF
 from datetime import datetime
 import base64
-import numpy as np
-from PIL import Image
+
 
 
 def create_download_link(val, filename):
