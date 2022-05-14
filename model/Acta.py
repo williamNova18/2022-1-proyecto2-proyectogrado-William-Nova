@@ -1,8 +1,6 @@
 from fpdf import FPDF
 
 
-
-
 class PDF(FPDF):
     inicializar = ''
     nombre_pdf = ''

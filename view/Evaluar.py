@@ -1,6 +1,4 @@
-from model.EvalEstudiante import EvaluacionEstudiante
 from model.Calificacion import Calificacion
-from datetime import datetime
 
 """ Este archivo contine las funcionalidades de la vista relacionado con la evaluacion de los anteproyectos"""
 
@@ -117,7 +115,7 @@ def listar_evaluacion(st, controller, criterios_controller ):
                         evaluacion.nota += ((i.nota_final) * i.ponderacion)
                 evaluacion.comentario_final = st.text_input( "Comentario final", value = evaluacion.comentario_final )
                 if evaluacion.nota >= 4.5:
-                    evaluacion.recomendacion = st( "Recomendación y apreciaciones: ", value = evaluacion.recomendacion )
+                    evaluacion.recomendacion = st.text_input( "Recomendación y apreciaciones: ", value = evaluacion.recomendacion )
                 enviar_btn = st.button( "Editar" )
                 if enviar_btn:
                     st.success( "Cambio realizado" )

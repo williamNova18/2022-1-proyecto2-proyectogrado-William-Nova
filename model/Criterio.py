@@ -1,4 +1,3 @@
-import json
 
 
 class Criterio:
@@ -13,5 +12,3 @@ class Criterio:
         self.descripcion = descripcion
         self.porcentaje_ponderacion = porcentaje_ponderacion
 
-    def __str__(self) -> str:
-        return json.dump(self.__dict__)

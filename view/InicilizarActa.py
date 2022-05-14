@@ -1,15 +1,10 @@
 from model.EvalEstudiante import EvaluacionEstudiante
-from model.Calificacion import Calificacion
 from datetime import datetime
 
 
 
 def agregar_datos(st, controller, criterios_controller):
-    nota_maxima = 5.0
-    nota_minima = 0.0
     mes = int(datetime.today().strftime('%m'))
-
-    comprovador_calificacion = True
     st.title( "Calificar Trabajos" )
     evaluacion_obj = EvaluacionEstudiante()
     evaluacion_obj.id_estudiante = st.text_input("Id estudiante")
