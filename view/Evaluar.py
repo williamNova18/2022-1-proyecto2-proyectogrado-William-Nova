@@ -8,7 +8,9 @@ def agregar_evaluacion(st, controller, criterios_controller):
     nota_minima = 0.0
     lista_nombres = []
     for nombres in controller.evaluaciones:
-        lista_nombres.append( nombres.nombre_autor )
+            lista_nombres.append( nombres.nombre_autor )
+            if len( nombres.calificacion ):
+                lista_nombres.pop()
     seleccion_estudiante = st.selectbox( "Calificar a:", lista_nombres )
     for evaluacion_obj in controller.evaluaciones:
         if evaluacion_obj.nombre_autor == seleccion_estudiante:
@@ -22,10 +24,10 @@ def agregar_evaluacion(st, controller, criterios_controller):
                 lista_calificaciones[i].ponderacion = criterios_controller.criterios[i].porcentaje_ponderacion
             for j in range( len( lista_calificaciones )  ):
                 st.subheader( "Criterio "+ lista_calificaciones[j].id_criterio )
-                lista_calificaciones[ j ].nota_jurado1 = st.number_input( "Nota jurado 1:", key = (j + 1) * 10, min_value = nota_minima, max_value = nota_maxima  )
+                lista_calificaciones[j].nota_jurado1 = st.number_input( "Nota jurado 1:", key = (j + 1) * 10, min_value = nota_minima, max_value = nota_maxima )
                 lista_calificaciones[j].nota_jurado2 = st.number_input( "Nota jurado 2:", key = j, min_value = nota_minima, max_value = nota_maxima )
                 lista_calificaciones[j].nota_final = round((lista_calificaciones[ j ].nota_jurado1 + lista_calificaciones[ j ].nota_jurado2) / lista_calificaciones[ j ].numero_jurados, 2)
-                lista_calificaciones[j].comentario = st.text_input("Comentario:", key = (j + 1) * 20 )
+                lista_calificaciones[j].comentario = st.text_input("Comentario:", key = (j + 1) * 20, )
                 evaluacion_obj.nota = (lista_calificaciones[j].nota_final * lista_calificaciones[j].ponderacion) + evaluacion_obj.nota
             evaluacion_obj.nota = 0
             for j in range(len(lista_calificaciones)):
@@ -33,7 +35,7 @@ def agregar_evaluacion(st, controller, criterios_controller):
             evaluacion_obj.comentario_final = st.text_input( "Comentario Final:" )
             evaluacion_obj.correciones = st.text_input( "Correciones: " )
             if evaluacion_obj.nota >= 4.5:
-                evaluacion_obj.recomendacion = st.text_input("Recomendación y apreciaciones:")
+                evaluacion_obj.recomendacion = st.text_input("Recomendación y apreciaciones:" )
             st.subheader("Nota final: " + str(evaluacion_obj.nota))
             if evaluacion_obj.nota > 3.5:
                 st.success( "Aprobado" )
@@ -86,7 +88,7 @@ def listar_evaluacion(st, controller, criterios_controller ):
                 st.subheader("Nota final : " + str(evaluacion.nota) )
                 st.subheader("Comentario final : " + evaluacion.comentario_final)
                 if evaluacion.nota >= 4.5:
-                    st.subheader("Recomendación y apreciaciones: ", value = evaluacion.recomendacion)
+                    st.subheader("Recomendación y apreciaciones: " + evaluacion.recomendacion)
             else:
                 evaluacion.id_estudiante = st.text_input("Id estudiante", value = evaluacion.id_estudiante  )
                 evaluacion.periodo = st.text_input("Periodo de evaluacion", value = evaluacion.periodo )
