@@ -96,3 +96,5 @@ webencodings>=0.5.1
 widgetsnbextension>=3.6.0
 zipp>=3.8.0
 zope.interface>=5.4.0
+matplotlib~=3.5.2
+fpdf~=1.7.2
