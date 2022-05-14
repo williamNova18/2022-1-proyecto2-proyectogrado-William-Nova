@@ -34,6 +34,11 @@ def agregar_evaluacion(st, controller, criterios_controller):
             evaluacion_obj.correciones = st.text_input( "Correciones: " )
             if evaluacion_obj.nota >= 4.5:
                 evaluacion_obj.recomendacion = st.text_input("Recomendación y apreciaciones:")
+            st.subheader("Nota final: " + str(evaluacion_obj.nota))
+            if evaluacion_obj.nota > 3.5:
+                st.succes( "Aprobado" )
+            else:
+                st.error( "Reprobado" )
             enviado_btn = st.button("Send")
             evaluacion_obj.nota = round(evaluacion_obj.nota, 1)
 
