@@ -52,7 +52,6 @@ def agregar_evaluacion(st, controller, criterios_controller):
 
 
 def listar_evaluacion(st, controller, criterios_controller ):
-    """Itera los elementos de evaluacion agregados y los muestra"""
     st.title("Ver y editar calificaciones")
     ver_editar = st.radio("Que quieres hacer?", ('Ver', 'Editar') )
     estudiantes_nombres = []
@@ -73,7 +72,6 @@ def listar_evaluacion(st, controller, criterios_controller ):
                 st.subheader("Titulo del trabajo: " + evaluacion.nombre_trabajo)
                 st.subheader("Nombre director: " + evaluacion.nombre_director)
                 st.subheader("Nombre codirector: " + evaluacion.nombre_codirector)
-                print( evaluacion.__dir__() )
                 st.subheader("Enfasis en: " + evaluacion.enfasis)
                 st.subheader("Jurado1 : " + evaluacion.nombre_jurado1)
                 st.subheader("Jurado2 : " + evaluacion.nombre_jurado2)
